@@ -1,35 +1,25 @@
 import { Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
-import { fetchFeaturedProducts } from "./product-service";
-import type { Product } from "@/types";
+import { fetchFeaturedProducts } from "../api/product-service";
+import CartIcon from "@/components/cart-icon";
+import type { Product, } from "@/types";
+import { Stack } from "expo-router";
+import SearchBar from "@/components/search-bar";
+
 
 export default function Index() {
-  const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    const loadProducts = async () => {
-      const featuredProducts = await fetchFeaturedProducts();
-      setProducts(featuredProducts);
-    };
-
-    loadProducts();
-  }, []);
+  
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      { products.map((product) => (
-        <View key={product.id} style={{ margin: 10 }}>
-          <Text style={{ fontSize: 18, fontWeight: "bold" }}>{product.title}</Text>
-          <Text style={{ color: "gray" }}>{product.category}</Text>
-          <Text>{product.description}</Text>
-        </View>
-      ))}
-    </View>
+   <>
+   <Stack.Screen
+     name="Home"
+     options={{
+       headerTitle: "MY STORE",
+       headerRight: () => <CartIcon />,
+     }}
+   />
+   <SearchBar onSearch={(query) => console.log("Searching for:", query)} />
+   </>
   );
 }

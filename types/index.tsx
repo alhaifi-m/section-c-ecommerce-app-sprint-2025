@@ -1,4 +1,5 @@
 import React from "react";
+
 export interface Product {
   id: number;
   title: string;
@@ -58,4 +59,9 @@ export interface CartContextType {
 
 export interface CartProviderProps {
   children: React.ReactNode;
+}
+
+export interface CartIconProps {
+  color?: string
+  size?: number;
 }
