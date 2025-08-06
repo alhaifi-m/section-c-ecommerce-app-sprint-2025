@@ -11,9 +11,10 @@ const ProductCarousel = ({title, products, style} : ProductCarouselProps) => {
     }
 
     const handleProductPress = (product: Product) => {
-        // This is a placeholder for navigation logic
-        // We will come back when we implement product details screen
-        console.log("Product pressed:", product);
+       router.push({
+        pathname: `/product/${product.id}`,
+        params: { initialData: JSON.stringify(product) }
+       })
     }
 
     const renderItem: ListRenderItem<Product> = ({ item }) => (
